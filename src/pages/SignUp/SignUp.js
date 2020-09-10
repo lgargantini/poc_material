@@ -1,29 +1,29 @@
-import Button from '@material-ui/core/Button'
-import Page from 'material-ui-shell/lib/containers/Page/Page'
-import Paper from '@material-ui/core/Paper'
-import React, { useState, useContext } from 'react'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
-import { useAuth } from 'base-shell/lib/providers/Auth'
-import { useHistory } from 'react-router-dom'
-import { useIntl } from 'react-intl'
-import { useMenu } from 'material-ui-shell/lib/providers/Menu'
+import Button from "@material-ui/core/Button";
+import Page from "material-ui-shell/lib/containers/Page/Page";
+import Paper from "@material-ui/core/Paper";
+import React, { useState } from "react";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import { useAuth } from "base-shell/lib/providers/Auth";
+import { useHistory } from "react-router-dom";
+import { useIntl } from "react-intl";
+import { useMenu } from "material-ui-shell/lib/providers/Menu";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    width: 'auto',
+    width: "auto",
     marginLeft: theme.spacing(3),
     marginRight: theme.spacing(3),
     [theme.breakpoints.up(620 + theme.spacing(6))]: {
       width: 400,
-      marginLeft: 'auto',
-      marginRight: 'auto',
+      marginLeft: "auto",
+      marginRight: "auto",
     },
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(
       3
     )}px`,
@@ -41,62 +41,62 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
     height: `100%`,
   },
-}))
+}));
 
 const SignUp = () => {
-  const classes = useStyles()
-  const intl = useIntl()
-  const history = useHistory()
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [userEmail, setUserEmail] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const { setAuthMenuOpen } = useMenu()
-  const { auth, setAuth } = useAuth()
+  const classes = useStyles();
+  const intl = useIntl();
+  const history = useHistory();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const { setAuthMenuOpen } = useMenu();
+  const { setAuth } = useAuth();
 
   function handleSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
     authenticate({
-      displayName: 'User',
+      displayName: "User",
       email: username,
-    })
+    });
   }
 
   const authenticate = (user) => {
-    setAuth({ isAuthenticated: true, ...user })
+    setAuth({ isAuthenticated: true, ...user });
 
-    setAuthMenuOpen(false)
-    let _location = history.location
+    setAuthMenuOpen(false);
+    let _location = history.location;
 
-    let _route = '/home'
+    let _route = "/home";
     if (_location.state && _location.state.from) {
-      _route = _location.state.from.pathname
-      history.push(_route)
+      _route = _location.state.from.pathname;
+      history.push(_route);
     } else {
-      history.push(_route)
+      history.push(_route);
     }
-  }
+  };
 
   return (
     <Page
       pageTitle={intl.formatMessage({
-        id: 'sign_up',
-        defaultMessage: ' Sign up',
+        id: "sign_up",
+        defaultMessage: " Sign up",
       })}
       onBackClick={() => {
-        history.goBack()
+        history.goBack();
       }}
     >
       <Paper className={classes.paper} elevation={6}>
         <div className={classes.container}>
           <Typography component="h1" variant="h5">
-            {intl.formatMessage({ id: 'sign_up', defaultMessage: 'Sign up' })}
+            {intl.formatMessage({ id: "sign_up", defaultMessage: "Sign up" })}
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit} noValidate>
             <TextField
@@ -108,8 +108,8 @@ const SignUp = () => {
               fullWidth
               id="username"
               label={intl.formatMessage({
-                id: 'username',
-                defaultMessage: 'Username',
+                id: "username",
+                defaultMessage: "Username",
               })}
               name="username"
               autoComplete="username"
@@ -124,8 +124,8 @@ const SignUp = () => {
               fullWidth
               id="email"
               label={intl.formatMessage({
-                id: 'email',
-                defaultMessage: 'E-Mail',
+                id: "email",
+                defaultMessage: "E-Mail",
               })}
               name="email"
               autoComplete="email"
@@ -139,8 +139,8 @@ const SignUp = () => {
               fullWidth
               name="password"
               label={intl.formatMessage({
-                id: 'password',
-                defaultMessage: 'Password',
+                id: "password",
+                defaultMessage: "Password",
               })}
               type="password"
               id="password"
@@ -155,8 +155,8 @@ const SignUp = () => {
               fullWidth
               name="password_confirm"
               label={intl.formatMessage({
-                id: 'password_confirm',
-                defaultMessage: 'Confirm Password',
+                id: "password_confirm",
+                defaultMessage: "Confirm Password",
               })}
               type="password"
               id="password_confirm"
@@ -169,13 +169,13 @@ const SignUp = () => {
               color="primary"
               className={classes.submit}
             >
-              {intl.formatMessage({ id: 'sign_up', defaultMessage: 'Sign up' })}
+              {intl.formatMessage({ id: "sign_up", defaultMessage: "Sign up" })}
             </Button>
           </form>
         </div>
       </Paper>
     </Page>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;
